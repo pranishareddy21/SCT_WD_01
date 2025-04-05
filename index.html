@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Style Union</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <ul class="nav-links">
+      <li><a href="#" onclick="openSidebar('men')">Men</a></li>
+      <li><a href="#" onclick="openSidebar('women')">Women</a></li>
+      <li><a href="#" onclick="openSidebar('shoes')">Shoes</a></li>
+      <li><a href="#">Brand</a></li>
+    </ul>
+    <h1 class="logo">STYLE UNION</h1>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">×</button>
+    <div id="sidebar-content">
+      <!-- Dynamic content gets inserted here -->
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+
+  <!-- Hero Section -->
+<main class="main-hero">
+  <video autoplay muted loop id="bg-video">
+    <source src="C:/xampp/htdocs/Task1/bg-video.mp4.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
+  
+  <!-- Optional dark overlay for contrast -->
+  <div class="overlay"></div>
+
+  <!-- Centered content -->
+  <div class="hero-content">
+    <h1 class="glitch" data-text="STYLE UNION">STYLE UNION</h1>
+    <h2 class="subhead">SPORTCROSS ATG<sup>®</sup></h2>
+    <p class="tagline">The most comfortable all-terrain golf shoes</p>
+    <a href="#" class="btn">SHOP NOW</a>
+  </div>
+</main>
+
+  <!-- JavaScript -->
+  <script>
+    function openSidebar(category) {
+  const sidebar = document.getElementById("sidebar");
+  const backdrop = document.getElementById("sidebar-backdrop");
+  const content = document.getElementById("sidebar-content");
+
+  sidebar.classList.add("active");
+  backdrop.classList.add("active");
+
+  let html = "";
+  if (category === "men") {
+    html = "<h2>Men's Collection</h2><ul><li>T-Shirts</li><li>Joggers</li><li>Sneakers</li></ul>";
+  } else if (category === "women") {
+    html = "<h2>Women's Collection</h2><ul><li>Leggings</li><li>Tanks</li><li>Sneakers</li></ul>";
+  } else if (category === "shoes") {
+    html = "<h2>Shoes</h2><ul><li>Sneakers</li><li>Golf</li><li>Slides</li></ul>";
+  }
+
+  content.innerHTML = html;
+}
+
+function closeSidebar() {
+  document.getElementById("sidebar").classList.remove("active");
+  document.getElementById("sidebar-backdrop").classList.remove("active");
+}
+function toggleSidebar(category = null) {
+  const sidebar = document.getElementById("sidebar");
+  const sidebarContent = document.getElementById("sidebar-content");
+
+  if (category) {
+    sidebar.classList.add("active");
+
+    let content = "";
+    if (category === "men") {
+      content = `
+        <img src="C:/xampp/htdocs/Task1/men.jpg"alt="New Arrivals" class="header-img">
+        <h2>MEN</h2>
+
+        <div class="accordion-item">
+          <div class="accordion-title" onclick="toggleAccordion(this)">Clothing <span>▾</span></div>
+          <div class="accordion-content">
+            <a href="#">T-Shirts</a>
+            <a href="#">Hoodies</a>
+            <a href="#">Jackets</a>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title" onclick="toggleAccordion(this)">Shoes <span>▾</span></div>
+          <div class="accordion-content">
+            <a href="#">Sneakers</a>
+            <a href="#">Boots</a>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title" onclick="toggleAccordion(this)">Accessories <span>▾</span></div>
+          <div class="accordion-content">
+            <a href="#">Bags</a>
+            <a href="#">Watches</a>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-title" onclick="toggleAccordion(this)">Activity <span>▾</span></div>
+          <div class="accordion-content">
+            <a href="#">Running</a>
+            <a href="#">Hiking</a>
+            <a href="#">Training</a>
+          </div>
+        </div>
+      `;
+    }
+
+    sidebarContent.innerHTML = content;
+  } else {
+    sidebar.classList.remove("active");
+  }
+}
+
+function toggleAccordion(titleEl) {
+  const item = titleEl.parentElement;
+  item.classList.toggle("active");
+}
+
+  </script>
+
+</body>
+</html>
